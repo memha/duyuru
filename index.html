@@ -213,6 +213,50 @@
         </div>
       </section>
 
+      <!-- MTSK Sınav Güzergahları -->
+      <section class="section fade-in">
+        <h2>🗺️ MTSK Sınav Güzergahları</h2>
+        <p class="section-description">Sınav güzergah haritalarını incelemek için görsellere tıklayınız.</p>
+
+        <div class="route-gallery">
+          <div class="route-card">
+            <div class="route-frame" onclick="openRouteImage(this)">
+              <img src="A.GUZERGAH EYLUL 2025 -1.BOLUM.JPG" alt="1. Güzergah Eylül 2025 - 1. Bölüm" loading="lazy">
+            </div>
+            <div class="route-label">
+              <span class="route-badge">1. Güzergah</span>
+              <h4>Eylül 2025 – 1. Bölüm</h4>
+            </div>
+          </div>
+
+          <div class="route-card">
+            <div class="route-frame" onclick="openRouteImage(this)">
+              <img src="A.GUZERGAH EYLUL 2025 -2.BOLUM.JPG" alt="1. Güzergah Eylül 2025 - 2. Bölüm" loading="lazy">
+            </div>
+            <div class="route-label">
+              <span class="route-badge">1. Güzergah</span>
+              <h4>Eylül 2025 – 2. Bölüm</h4>
+            </div>
+          </div>
+
+          <div class="route-card">
+            <div class="route-frame" onclick="openRouteImage(this)">
+              <img src="B.GUZERGAH EYLUL 2025 .JPG" alt="2. Güzergah Eylül 2025" loading="lazy">
+            </div>
+            <div class="route-label">
+              <span class="route-badge">2. Güzergah</span>
+              <h4>Eylül 2025</h4>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resim Büyütme Modal -->
+      <div class="route-modal" id="route-modal" onclick="closeRouteImage(event)">
+        <button class="route-modal-close" onclick="closeRouteImage(event)" aria-label="Kapat">&times;</button>
+        <img id="route-modal-img" src="" alt="Güzergah Haritası">
+      </div>
+
       <!-- MEB Ajanda & Tablet -->
       <section class="section fade-in">
         <h2>📱 MEB Ajanda & Tablet ve Mevzuat</h2>

@@ -98,3 +98,34 @@ document.addEventListener("DOMContentLoaded", () => {
   emphasisStyle.textContent = ".intro-text, .section h2:first-child { color: #6b3f24 !important; font-weight: 800 !important; }";
   document.head.appendChild(emphasisStyle);
 });
+
+// Güzergah resim modal fonksiyonları
+function openRouteImage(frameEl) {
+  const img = frameEl.querySelector('img');
+  if (!img) return;
+  const modal = document.getElementById('route-modal');
+  const modalImg = document.getElementById('route-modal-img');
+  modalImg.src = img.src;
+  modalImg.alt = img.alt;
+  modal.classList.add('is-open');
+  document.body.classList.add('modal-open');
+}
+
+function closeRouteImage(event) {
+  const modal = document.getElementById('route-modal');
+  const modalImg = document.getElementById('route-modal-img');
+  // Resme tıklanınca kapatma
+  if (event && event.target === modalImg) return;
+  modal.classList.remove('is-open');
+  document.body.classList.remove('modal-open');
+}
+
+// ESC ile güzergah modalını kapat
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('route-modal');
+    if (modal && modal.classList.contains('is-open')) {
+      closeRouteImage(e);
+    }
+  }
+});
