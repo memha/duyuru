@@ -97,7 +97,16 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .video-card:hover .play-icon { transform:translate(-50%,-50%) scale(1.1); box-shadow:0 17px 36px rgba(227,30,36,.44); }
 .play-icon svg { width:27px; height:27px; margin-left:3px; }
 .video-details { padding:1rem 1.1rem 1.15rem; }.video-details h4,.action-card h3 { color:var(--ink); font-weight:800; letter-spacing:-.01em; }.video-details h4 { font-size:1.06rem; }.video-details span,.action-card p { color:var(--muted); font-size:.9rem; }
-.action-card { display:flex; flex-direction:column; padding:1.35rem; }.action-card p { margin:.34rem 0 1rem; }.action-card .btn { margin-top:auto; align-self:flex-start; }
+.action-card { display:flex; flex-direction:column; padding:1.35rem; }.action-card p { margin:.34rem 0 1rem; }.action-card .card-buttons { margin-top:auto; }
+.card-buttons { display:flex; flex-wrap:wrap; gap:.6rem; }
+.btn-download {
+  background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+  box-shadow: 0 8px 19px rgba(22, 163, 74, .22) !important;
+}
+.btn-download:hover {
+  background: linear-gradient(135deg, #15803d, #16a34a) !important;
+  box-shadow: 0 14px 27px rgba(22, 163, 74, .3) !important;
+}
 .card-icon-wrapper { display:grid; width:52px; height:52px; margin-bottom:.9rem; place-items:center; border-radius:15px; background:linear-gradient(145deg,#e8f5ff,#f4faff); }.card-icon{font-size:1.6rem;}
 
 .btn {
@@ -192,11 +201,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .route-badge {
   display: inline-flex;
   align-items: center;
-  padding: .3rem .75rem;
+  padding: .4rem .9rem;
   border-radius: 8px;
   background: linear-gradient(135deg, var(--brand), var(--cyan));
   color: #fff;
-  font-size: .78rem;
+  font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: .02em;
   white-space: nowrap;
@@ -204,7 +213,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .route-label h4 {
   color: var(--ink);
   font-weight: 800;
-  font-size: 1.02rem;
+  font-size: 1.3rem;
   letter-spacing: -.01em;
 }
 
@@ -237,11 +246,17 @@ button, a { -webkit-tap-highlight-color: transparent; }
   border: 4px solid rgba(255, 255, 255, .2);
   box-shadow: 0 30px 90px rgba(0, 0, 0, .5);
   transform: scale(.95);
-  transition: transform .4s var(--ease-out);
-  cursor: default;
+  transition: transform .4s var(--ease-out), max-width .4s var(--ease-out), max-height .4s var(--ease-out);
+  cursor: zoom-in;
 }
 .route-modal.is-open img {
   transform: scale(1);
+}
+.route-modal img.is-zoomed {
+  max-width: none;
+  max-height: none;
+  transform: scale(1.8);
+  cursor: zoom-out;
 }
 .route-modal-close {
   position: absolute;

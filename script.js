@@ -76,7 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".video-card[data-video]").forEach((card) => {
     card.addEventListener("click", (event) => {
       event.preventDefault();
-      openModal(card.dataset.video, card);
+      const videoId = card.dataset.video;
+      window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
     });
   });
   closeButton?.addEventListener("click", closeModal);
@@ -114,9 +115,13 @@ function openRouteImage(frameEl) {
 function closeRouteImage(event) {
   const modal = document.getElementById('route-modal');
   const modalImg = document.getElementById('route-modal-img');
-  // Resme tıklanınca kapatma
-  if (event && event.target === modalImg) return;
+  // Resme tıklanınca zoom toggle
+  if (event && event.target === modalImg) {
+    modalImg.classList.toggle('is-zoomed');
+    return;
+  }
   modal.classList.remove('is-open');
+  modalImg.classList.remove('is-zoomed');
   document.body.classList.remove('modal-open');
 }
 
