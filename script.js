@@ -1,136 +1,67 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const search = document.getElementById("document-search");
+  const filter = document.getElementById("document-filter");
+  const cards = [...document.querySelectorAll(".document-card")];
+  const count = document.getElementById("document-count");
+  const empty = document.getElementById("empty-documents");
 
-  // Sections animate only as they enter the viewport; this avoids animating
-  // content before a visitor can see it.
-  const sections = document.querySelectorAll(".section");
-  if (reduceMotion || !("IntersectionObserver" in window)) {
-    sections.forEach((section) => section.classList.add("is-visible"));
-  } else {
-    const sectionObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.12, rootMargin: "0px 0px -36px" });
-    sections.forEach((section, index) => {
-      section.style.transitionDelay = `${Math.min(index * 55, 180)}ms`;
-      sectionObserver.observe(section);
+  function filterDocuments() {
+    const term = (search?.value || "").toLocaleLowerCase("tr-TR").trim();
+    const kind = filter?.value || "all";
+    let visible = 0;
+    cards.forEach((card) => {
+      const text = (card.dataset.search + " " + card.innerText).toLocaleLowerCase("tr-TR");
+      const show = (kind === "all" || card.dataset.kind === kind) && text.includes(term);
+      card.hidden = !show;
+      if (show) visible++;
     });
+    count.textContent = visible + " belge listeleniyor";
+    empty.hidden = visible !== 0;
   }
+  search?.addEventListener("input", filterDocuments);
+  filter?.addEventListener("change", filterDocuments);
 
-  // Keep in-page anchor navigation smooth without overriding external links.
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", (event) => {
-      const target = document.querySelector(anchor.getAttribute("href"));
-      if (!target) return;
-      event.preventDefault();
-      target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-    });
-  });
+  document.getElementById("current-year").textContent = new Date().getFullYear();
 
-  // Subtle, input-originated ripple for the primary actions.
-  document.querySelectorAll(".btn, .store-btn").forEach((button) => {
-    button.addEventListener("click", (event) => {
-      if (reduceMotion) return;
-      const rect = button.getBoundingClientRect();
-      const ripple = document.createElement("span");
-      const size = Math.max(rect.width, rect.height);
-      ripple.className = "ripple";
-      ripple.style.cssText = `width:${size}px;height:${size}px;left:${event.clientX - rect.left - size / 2}px;top:${event.clientY - rect.top - size / 2}px`;
-      button.appendChild(ripple);
-      ripple.addEventListener("animationend", () => ripple.remove(), { once: true });
-    });
-  });
+  const modal = document.getElementById("image-modal");
+  const modalImage = document.getElementById("modal-image");
+  const closeButton = modal?.querySelector(".modal-close");
+  const imageWrap = modal?.querySelector(".modal-image-wrap");
+  let lastTrigger = null;
 
-  const modal = document.getElementById("video-modal");
-  const frame = document.getElementById("video-frame");
-  const closeButton = document.querySelector(".video-modal-close");
-  const backdrop = document.querySelector(".video-modal-backdrop");
-  let lastFocusedElement = null;
-
-  const closeModal = () => {
-    if (!modal || !frame) return;
-    modal.classList.remove("is-open");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("modal-open");
-    frame.src = "";
-    lastFocusedElement?.focus();
-  };
-
-  const openModal = (videoId, trigger) => {
-    if (!modal || !frame) return;
-    lastFocusedElement = trigger;
-    const params = new URLSearchParams({
-      autoplay: "1", rel: "0", modestbranding: "1", playsinline: "1"
-    });
-    if (/^https?:$/.test(window.location.protocol)) params.set("origin", window.location.origin);
-    frame.src = `https://www.youtube-nocookie.com/embed/${videoId}?${params}`;
+  function openImage(button) {
+    lastTrigger = button;
+    modalImage.src = button.dataset.image;
+    modalImage.alt = button.dataset.alt || "Sınav güzergâh haritası";
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
-    document.body.classList.add("modal-open");
+    document.body.style.overflow = "hidden";
     closeButton?.focus();
-  };
+  }
+  function closeImage() {
+    if (!modal?.classList.contains("is-open")) return;
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    modalImage.src = "";
+    document.body.style.overflow = "";
+    lastTrigger?.focus();
+  }
+  document.querySelectorAll(".route-card[data-image]").forEach((button) => {
+    button.addEventListener("click", () => openImage(button));
+  });
+  closeButton?.addEventListener("click", closeImage);
+  modal?.addEventListener("click", (event) => {
+    if (event.target === modal) closeImage();
+  });
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeImage();
+  });
 
-  document.querySelectorAll(".video-card[data-video]").forEach((card) => {
-    card.addEventListener("click", (event) => {
-      event.preventDefault();
-      const videoId = card.dataset.video;
-      window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+  // Store checklist progress locally only for the current page view.
+  document.querySelectorAll(".check-item input").forEach((input) => {
+    input.addEventListener("change", () => {
+      const item = input.closest(".check-item");
+      item?.classList.toggle("is-checked", input.checked);
     });
   });
-  closeButton?.addEventListener("click", closeModal);
-  backdrop?.addEventListener("click", closeModal);
-  window.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && modal?.classList.contains("is-open")) closeModal();
-  });
-
-  // Görevli bilgilendirme başlığı ve metnini koyu kahverengi ve kalın yap.
-  const noticeHeading = document.querySelector(".section h2");
-  const introText = document.querySelector(".intro-text");
-  [noticeHeading, introText].forEach((element) => {
-    if (!element) return;
-    element.style.setProperty("color", "#6b3f24", "important");
-    element.style.setProperty("font-weight", "800", "important");
-  });
-
-  const emphasisStyle = document.createElement("style");
-  emphasisStyle.textContent = ".intro-text, .section h2:first-child { color: #6b3f24 !important; font-weight: 800 !important; }";
-  document.head.appendChild(emphasisStyle);
-});
-
-// Güzergah resim modal fonksiyonları
-function openRouteImage(frameEl) {
-  const img = frameEl.querySelector('img');
-  if (!img) return;
-  const modal = document.getElementById('route-modal');
-  const modalImg = document.getElementById('route-modal-img');
-  modalImg.src = img.src;
-  modalImg.alt = img.alt;
-  modal.classList.add('is-open');
-  document.body.classList.add('modal-open');
-}
-
-function closeRouteImage(event) {
-  const modal = document.getElementById('route-modal');
-  const modalImg = document.getElementById('route-modal-img');
-  // Resme tıklanınca zoom toggle
-  if (event && event.target === modalImg) {
-    modalImg.classList.toggle('is-zoomed');
-    return;
-  }
-  modal.classList.remove('is-open');
-  modalImg.classList.remove('is-zoomed');
-  document.body.classList.remove('modal-open');
-}
-
-// ESC ile güzergah modalını kapat
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    const modal = document.getElementById('route-modal');
-    if (modal && modal.classList.contains('is-open')) {
-      closeRouteImage(e);
-    }
-  }
 });
