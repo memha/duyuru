@@ -3,3 +3,80 @@
 .check-download{display:inline-flex;align-items:center;margin-top:5px;padding:4px 8px;border-radius:7px;background:#e8f2ff;color:#1259a2;font-size:10px;font-weight:800;text-decoration:none}
 .check-download:hover{background:#d8eaff;text-decoration:underline}
 .check-item a:focus-visible{outline:3px solid #f8b84e;outline-offset:2px}
+
+
+/* Kurumsal kırmızı tema – Haliliye İlçe Millî Eğitim Müdürlüğü */
+:root{
+  --navy:#a9161d;
+  --navy2:#c51f27;
+  --blue:#c51f27;
+  --blue-soft:#fff0f0;
+  --ink:#202b3b;
+  --muted:#687487;
+  --line:#e2e7ee;
+  --canvas:#f5f6f8;
+  --shadow:0 8px 24px rgba(31,45,61,.07);
+  --radius:17px;
+}
+body{background:linear-gradient(115deg,#f7f3f4 0%,#f7f9fc 58%,#f4f7fb 100%);color:var(--ink)}
+.header{
+  background:linear-gradient(105deg,#b71920 0%,#d52229 58%,#b91c23 100%);
+  padding:15px 0 0;
+  box-shadow:0 2px 9px rgba(120,20,25,.16);
+}
+.topline{color:#ffe1e2;letter-spacing:.12em}
+.topline-dot{background:#fff;box-shadow:0 0 0 5px #ffffff20}
+.eyebrow{color:#ffe0e1}
+.hero-grid{padding:30px 0 26px;gap:clamp(24px,5vw,66px)}
+.hero-copy h1{font-size:clamp(30px,4vw,45px)}
+.hero-copy h1 span{color:#ffd2d4}
+.hero-description{color:#ffe8e9}
+.hero-panel{background:#ffffff18;border-color:#ffffff42;box-shadow:0 12px 30px #650b1030}
+.panel-heading small,.time-row small{color:#ffe0e1}
+.time-status{color:#fff;background:#ffffff20;border-color:#ffffff35}
+.panel-link{color:#fff}
+.quick-nav{padding-bottom:16px}
+.quick-nav a{color:#fff0f0}
+.quick-nav a:hover{background:#ffffff20}
+.quick-nav a span{color:#ffd0d2}
+.main-content{padding-top:24px}
+.section,.resource-card,.check-item,.store-link,.document-card,.route-card{
+  border-color:#e2e6ec;
+  box-shadow:0 5px 18px rgba(31,45,61,.045);
+}
+.section{background:rgba(255,255,255,.96)}
+.section-kicker{color:#bd242b}
+.heading-icon{background:#fff0f0;color:#bd242b}
+.notice-banner{background:#fff;border-color:#f0d7d8}
+.notice-mark{background:#fff0f0;color:#bd242b}
+.notice-banner h2{color:#8f1d23}
+.notice-banner p{color:#6f5960}
+.notice-side{color:#bd242b}
+.btn-primary,.btn-mebdus{
+  background:#c91f27;color:#fff;
+  box-shadow:0 6px 15px rgba(201,31,39,.18)
+}
+.btn-primary:hover,.btn-mebdus:hover{background:#a9161d}
+.btn-outline{border-color:#dce1e8;color:#46566b}
+.btn-outline:hover{background:#fff5f5;border-color:#e8bfc1}
+.resource-icon.blue{background:#fff0f0;color:#b91f27}
+.resource-icon.orange{background:#fff4e9;color:#a85b18}
+.check-item:hover{border-color:#e7b8bb;background:#fffafa}
+.check-item input:checked+.check-box{background:#bd242b;border-color:#bd242b}
+.info-strip{background:#fff5f5;border-color:#f1dddd}
+.info-strip>span{background:#ffe3e4;color:#b51d25}
+.info-strip a{color:#b51d25}
+.store-link:hover{border-color:#e7b8bb;background:#fffafa}
+.document-card>a{background:#fff0f0;color:#b51d25}
+.document-card>a:hover{background:#bd242b;color:#fff}
+.route-card:hover{border-color:#e7b8bb}
+.zoom-label{background:#b91f27e8}
+.footer{background:#86151b}
+.footer-inner>a:hover{background:#ffffff18}
+.search-box:focus-within,.filter-select:focus-within{border-color:#d77a7f;box-shadow:0 0 0 3px #c91f2715}
+.check-download{background:#fff0f0;color:#b51d25}
+.check-download:hover{background:#ffe1e2}
+@media(max-width:580px){
+  .header{padding-top:15px}
+  .hero-grid{padding:25px 0 20px}
+}
