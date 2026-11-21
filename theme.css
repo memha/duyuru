@@ -45,7 +45,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 .hero-panel{min-width:0;padding:21px;color:#fff;background:linear-gradient(145deg,#1e293b,#334155);border:1px solid #ffffff20;border-radius:16px;box-shadow:0 12px 28px #1e293b20}
 .panel-heading{display:flex;align-items:center;gap:12px;padding-bottom:15px;border-bottom:1px solid #ffffff22}
 .panel-icon,.time-symbol{display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border-radius:11px;color:#fff;background:#ffffff19;font-size:22px}
-.panel-heading strong{font-size:16px}.panel-heading small,.time-row small{color:#cbd5e1;font-size:11px}
+.panel-heading strong{font-size:16px}.panel-heading small{color:#e2e8f0;font-size:11px}.time-row small{display:inline-block;margin-bottom:5px;padding:3px 8px;border-radius:5px;background:#fef3c7;color:#713f12;font-size:12px;font-weight:900;letter-spacing:.01em}.time-row strong{color:#fff}.time-status{padding:5px 8px;border-radius:6px;background:#fff;color:#1e293b;font-size:10px;font-weight:900;text-align:center}
 .time-row{display:flex;align-items:center;gap:11px;padding:14px 0;border-bottom:1px solid #ffffff20}
 .time-row>div:nth-child(2){min-width:0}.time-row strong{display:block;font-size:24px;line-height:1.2}
 .time-status{margin-left:auto;color:#fecaca;font-size:10px;font-weight:800;text-align:right}
