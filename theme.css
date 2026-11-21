@@ -190,3 +190,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 }
 @media(max-width:390px){.container{width:calc(100% - 22px)}.video-grid,.resource-actions{grid-template-columns:minmax(0,1fr)}.mebdus-card{grid-template-columns:minmax(0,1fr)}.mebdus-qr{align-items:flex-start}.footer-inner{flex-direction:column}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+
+/* Üst tanıtım alanındaki başlık ve açıklamaları ortala */
+.topline{justify-content:center;text-align:center}
+.hero-copy{text-align:center}
+.hero-copy .eyebrow{text-align:center}
+.hero-copy h1{text-align:center}
+.hero-description{margin-left:auto;margin-right:auto;text-align:center}
+.hero-copy .btn-hero{margin-left:auto;margin-right:auto}
