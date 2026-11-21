@@ -198,3 +198,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 .hero-copy h1{text-align:center}
 .hero-description{margin-left:auto;margin-right:auto;text-align:center}
 .hero-copy .btn-hero{margin-left:auto;margin-right:auto}
+
+/* Kurum adı ve alt başlık satırlarını ortala */
+.institution-title{text-align:center;justify-items:center}
+.institution-title strong,.institution-title small{width:100%;text-align:center}
